@@ -88,6 +88,7 @@ export default {
         this.image = null;
         this.description = "";
         this.message = res.data.message;
+        this.$store.dispatch("getImage");
         setTimeout(() => {
           this.message = "";
         }, 3000);

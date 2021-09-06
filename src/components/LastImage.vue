@@ -16,19 +16,13 @@
 </template>
 
 <script>
-import ImageService from "../services/ImageService";
 import { mapState } from "vuex";
 
 export default {
   name: "LastImage",
   imageService: null,
   created() {
-    this.imageService = new ImageService();
-    this.imageService.getImage().then(({ data }) => {
-      console.log(data, process.env.VUE_APP_API_HOST);
-      data.data.image_path = `${process.env.VUE_APP_API_HOST}/${data.data.image_path}`;
-      this.$store.commit("setImage", data.data);
-    });
+    this.$store.dispatch("getImage");
   },
   computed: mapState(["image"]),
 };
