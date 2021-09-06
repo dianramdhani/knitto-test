@@ -1,6 +1,7 @@
 # knitto-test
 Pastikan project knitto-test-backend sudah active.
- 
+Buatkan file env yang berisi konfigurasi host dari knitto-test-backend.
+
 ## Project setup
 ```
 yarn install
