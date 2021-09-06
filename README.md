@@ -1,5 +1,6 @@
 # knitto-test
-
+Pastikan project knitto-test-backend sudah active.
+ 
 ## Project setup
 ```
 yarn install
