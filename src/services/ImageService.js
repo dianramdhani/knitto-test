@@ -14,6 +14,6 @@ export default class ImageService {
     }
 
     getImage() {
-        return new Promise((resolve, reject) => { resolve('test') });
+        return axios.get('http://localhost:8001/api/image');
     }
 };

@@ -22,7 +22,7 @@
               class="img-fluid"
               style="max-height: 150px"
               alt="Uploaded Image"
-              :src="getImageUrl(image)"
+              :src="imageUrl"
             />
           </div>
           <input
@@ -67,10 +67,14 @@ export default {
       message: "",
     };
   },
+  computed: {
+    imageUrl() {
+      return this.image ? URL.createObjectURL(this.image) : "";
+    },
+  },
   imageService: null,
   created() {
     this.imageService = new ImageService();
-    this.imageService.getImage().then((res) => console.log(res));
   },
   methods: {
     async onSubmit() {
@@ -91,9 +95,6 @@ export default {
     },
     onImageChange(event) {
       this.image = event.target.files[0];
-    },
-    getImageUrl(image) {
-      return image ? URL.createObjectURL(this.image) : "";
     },
   },
 };
