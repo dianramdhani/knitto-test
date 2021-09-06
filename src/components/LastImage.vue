@@ -1,33 +1,35 @@
 <template>
   <div class="card">
-    <!-- <img src="..." class="card-img-top" alt="No image uploaded" /> -->
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title">{{ image.title }}</h5>
+      <img
+        class="img-fluid mb-2"
+        alt="No image uploaded"
+        style="max-height: 200px"
+        :src="image.image_path"
+      />
       <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+        {{ image.description }}
       </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
 </template>
 
 <script>
 import ImageService from "../services/ImageService";
+import { mapState } from "vuex";
 
 export default {
   name: "LastImage",
-  data() {
-    return {
-      title: "",
-      image: null,
-      description: "",
-    };
-  },
   imageService: null,
   created() {
     this.imageService = new ImageService();
-    this.imageService.getImage().then((res) => console.log(res));
+    this.imageService.getImage().then(({ data }) => {
+      console.log(data, process.env.VUE_APP_API_HOST);
+      data.data.image_path = `${process.env.VUE_APP_API_HOST}/${data.data.image_path}`;
+      this.$store.commit("setImage", data.data);
+    });
   },
+  computed: mapState(["image"]),
 };
 </script>
